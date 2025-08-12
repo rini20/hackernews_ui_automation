@@ -1,0 +1,30 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Playwright
+playwright/.cache/
+test-results/
+trace.zip
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Config files
+*.cfg
+
+
+#IDEs
+.vscode/
+.idea/
+*.iml
