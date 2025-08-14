@@ -24,7 +24,7 @@ pip install -r requirements.txt
 Clone this repository:
 ```bash
 git clone https://github.com/rini20/hackernews_ui_automation
-
+```
 
 Notes
 1. This project is still Work In Progress (WIP) — tests will be added and refined regularly.

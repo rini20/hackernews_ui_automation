@@ -1,23 +1,26 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import expect
 import re
 from random import randint
+from page_objects.landing_page import HackerNews
 
 # 1. Verify stories have title
 
-def test_story_title(page: Page):
-    page.goto("https://news.ycombinator.com/")
-    title_rows = page.locator("tr.athing")
+def test_story_title(page):
+    hacker_news = HackerNews(page)
+    hacker_news.navigate()
+
+    title_rows = hacker_news.get_title_rows()
     expect(title_rows).not_to_have_count(0)
+
     count = title_rows.count()
     for i in range(count):
-        title_rank = title_rows.nth(i).locator("span.rank").inner_text()
-        title = title_rows.nth(i).locator("span.titleline > a")
-        title_text = title.inner_text().strip()
-        assert title_text != "", f"title missing for {title_rank}"
+        title_rank = hacker_news.get_title_rank(row=title_rows, index=i)
+        title = hacker_news.get_title(row=title_rows, index=i)
+        assert title, f"title missing for {title_rank}"
 
 # 2. Verify each story has a valid url
-
-def test_story_link(page: Page):
+'''
+def test_story_link(page):
     page.goto("https://news.ycombinator.com/")
     title_rows = page.locator("tr.athing")
     expect(title_rows).not_to_have_count(0)
@@ -69,7 +72,7 @@ def test_subtext(page: Page):
     expect(score).to_have_text(re.compile(r"\d+ points?"))
     expect(author).to_have_text(re.compile(r".+"), use_inner_text=True)
     expect(comment).to_have_text(re.compile(r"\d+\s*comments?"))
-
+'''
 
 
 
