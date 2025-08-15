@@ -19,28 +19,31 @@ def test_story_title(page):
         assert title, f"title missing for {title_rank}"
 
 # 2. Verify each story has a valid url
-'''
+
 def test_story_link(page):
-    page.goto("https://news.ycombinator.com/")
-    title_rows = page.locator("tr.athing")
+    hacker_news = HackerNews(page)
+    hacker_news.navigate()
+
+    title_rows = hacker_news.get_title_rows()
     expect(title_rows).not_to_have_count(0)
+
     count = title_rows.count()
     for i in range(count):
-        title = title_rows.nth(i)
-        title_rank = title.locator("td > span.rank").inner_text().strip()
-        title_a = title.locator("span.titleline > a")
-        link = title_a.get_attribute("href")
-        assert link, f"Story missing for: {title_rank}"
-        if not link.startswith("http"):
-            print(f"{title_rank} {link} is an HN internal link")
+        title_rank = hacker_news.get_title_rank(row=title_rows, index=i)
+        title_link = hacker_news.get_title_link(row=title_rows, index=i)
+        assert title_link, f"Story missing for: {title_rank}"
+        if not title_link.startswith("http"):
+            print(f"{title_rank} {title_link} is an HN internal link")
 
 # 3. Verify 'new' menu option url
 
-def test_new_stories(page: Page):
-    page.goto("https://news.ycombinator.com/")
-    page.get_by_role("link", name="new", exact=True).click()
+def test_new_stories(page):
+    hacker_news = HackerNews(page)
+    hacker_news.navigate()
+    hacker_news.click_new()
     expect(page).to_have_url(re.compile(".*newest"))
 
+'''
 # 4. Verify on clicking a random story the correct  external link opens and title is valid
 
 def test_open_link(page: Page):

@@ -18,3 +18,11 @@ class HackerNews:
 
     def get_title(self, row, index):
         return row.nth(index).locator("span.titleline > a").inner_text().strip()
+
+    def get_title_link(self, row, index):
+        title_a = row.nth(index).locator("span.titleline > a")
+        return title_a.get_attribute("href")
+
+    def click_new(self):
+        self.page.get_by_role("link", name="new", exact=True).click()
+
