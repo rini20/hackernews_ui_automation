@@ -3,7 +3,7 @@ from playwright.sync_api import Playwright
 
 
 def pytest_addoption(parser):
-    parser.addoption("--browser_name", action="store", default="chromium", help="browser selection: chrome or firefox")
+    parser.addoption("--browser_name", action="store", default="chromium", help="browser selection: chromium or firefox")
 
 @pytest.fixture(scope="module")
 def page(playwright: Playwright, request):

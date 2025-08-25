@@ -9,13 +9,16 @@ The goal is to:
 - Automate verification of story details like scores, comments, and authors
 
 ## 🚧 Status
-Currently under active development. I will be committing updates daily as I build and refine the tests.
+Currently under active development. I will be committing updates regularly as I build and refine the tests.
 
 ## 📦 Requirements
 - Python 3.8+
 - pip
 - Playwright browsers
 - pytest-playwright plugin
+- pytest-html
+- pytest-xdist
+
 
 ## ⚙️ Installation
 
