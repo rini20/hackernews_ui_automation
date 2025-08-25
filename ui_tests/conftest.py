@@ -18,7 +18,8 @@ def page(playwright: Playwright, request):
     context = browser.new_context()
     page = context.new_page()
     yield page
-    context.close()
     page.close()
+    context.close()
+
 
 
